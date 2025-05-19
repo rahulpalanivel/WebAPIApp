@@ -15,17 +15,18 @@ namespace WebApp.Repository.Implementation
 
         public void addProfessor(Professor professor)
         {
-            throw new NotImplementedException();
+            _dbContext.Professors.Add(professor);
+            _dbContext.SaveChangesAsync();
         }
 
         public void deleteProfessor(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Professor getProfessor(int id)
-        {
-            throw new NotImplementedException();
+            var professor = _dbContext.Professors.Where(p => p.Id == id).FirstOrDefault();
+            if (professor != null) 
+            {
+                _dbContext.Professors.Remove(professor);
+            }
+            _dbContext.SaveChangesAsync();
         }
 
         public List<Professor> getProfessors()

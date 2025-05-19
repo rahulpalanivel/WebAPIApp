@@ -6,8 +6,6 @@ namespace WebApp.Repository.Interface
     {
         List<Professor> getProfessors();
 
-        Professor getProfessor(int id);
-
         void addProfessor(Professor professor);
 
         void deleteProfessor(int id);

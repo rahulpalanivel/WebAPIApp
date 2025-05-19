@@ -15,17 +15,31 @@ namespace WebApp.Service.Implementation
         }
         public void addProfessor(Professor professor)
         {
-            throw new NotImplementedException();
+            _professorRepository.addProfessor(professor);
         }
 
         public void deleteProfessor(int id)
         {
-            throw new NotImplementedException();
+            _professorRepository.deleteProfessor(id);
         }
 
         public ProfessorDTO getProfessor(int id)
         {
-            throw new NotImplementedException();
+            Professor? professor = _professorRepository.getProfessors().Where(p=>p.Id == id).FirstOrDefault();
+            
+            if (professor == null) 
+            {
+                return null;
+            }
+            
+            ProfessorDTO professorDTO = new ProfessorDTO() 
+            { 
+                Name = professor.Name,
+                email = professor.email,
+                Courses = professor.Courses,
+            };
+
+            return professorDTO;
         }
 
         public List<ProfessorDTO> getProfessors()
