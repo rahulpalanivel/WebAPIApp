@@ -4,13 +4,13 @@ namespace WebApp.Repository.Interface
 {
     public interface IProfessorRepository
     {
-        List<Professor> getProfessors();
+        Task<List<Professor>> getProfessors();
 
-        void addProfessor(Professor professor);
+        Task addProfessor(Professor professor);
 
-        void deleteProfessor(int id);
+        Task deleteProfessor(int id);
 
-        void updateProfessor(Professor professor);
+        Task updateProfessor(Professor professor);
 
     }
 }

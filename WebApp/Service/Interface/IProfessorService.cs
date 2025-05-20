@@ -5,14 +5,14 @@ namespace WebApp.Service.Interface
 {
     public interface IProfessorService
     {
-        List<ProfessorDTO> getProfessors();
+        Task<List<ProfessorDTO>> getProfessors();
 
-        ProfessorDTO getProfessor(int id);
+        Task <ProfessorDTO> getProfessor(int id);
 
-        void addProfessor(Professor professor);
+        Task addProfessor(Professor professor);
 
-        void deleteProfessor(int id);
+        Task deleteProfessor(int id);
 
-        void updateProfessor(Professor professor);
+        Task updateProfessor(Professor professor);
     }
 }

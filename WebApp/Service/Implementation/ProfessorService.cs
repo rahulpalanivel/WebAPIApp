@@ -1,4 +1,5 @@
-﻿using WebApp.Data.DTO;
+﻿ using System.Threading.Tasks;
+using WebApp.Data.DTO;
 using WebApp.Data.Entity;
 using WebApp.Repository.Implementation;
 using WebApp.Repository.Interface;
@@ -13,20 +14,22 @@ namespace WebApp.Service.Implementation
         {
             this._professorRepository = professorRepository;
         }
-        public void addProfessor(Professor professor)
+        public async Task addProfessor(Professor professor)
         {
-            _professorRepository.addProfessor(professor);
+            await _professorRepository.addProfessor(professor);
         }
 
-        public void deleteProfessor(int id)
+        public async Task deleteProfessor(int id)
         {
-            _professorRepository.deleteProfessor(id);
+            await _professorRepository.deleteProfessor(id);
         }
 
-        public ProfessorDTO getProfessor(int id)
+        public async Task<ProfessorDTO> getProfessor(int id)
         {
-            Professor? professor = _professorRepository.getProfessors().Where(p=>p.Id == id).FirstOrDefault();
-            
+            List<Professor>? professors = await _professorRepository.getProfessors();
+            var professor = professors.Where(p => p.Id == id).FirstOrDefault();
+
+
             if (professor == null) 
             {
                 return null;
@@ -42,11 +45,11 @@ namespace WebApp.Service.Implementation
             return professorDTO;
         }
 
-        public List<ProfessorDTO> getProfessors()
+        public async Task<List<ProfessorDTO>> getProfessors()
         {
             List<ProfessorDTO> professorDTOs = new List<ProfessorDTO>();
 
-            List<Professor> professors = _professorRepository.getProfessors();
+            List<Professor> professors = await _professorRepository.getProfessors();
             foreach(Professor professor in professors) 
             {
                 ProfessorDTO professorDTO = new ProfessorDTO() 
@@ -62,9 +65,9 @@ namespace WebApp.Service.Implementation
             
         }
 
-        public void updateProfessor(Professor professor)
+        public async Task updateProfessor(Professor professor)
         {
-            throw new NotImplementedException();
+            await _professorRepository.updateProfessor(professor);
         }
     }
 }
